@@ -19,7 +19,6 @@ public class SpawnManager : MonoBehaviour
     {
         
     }
-
     private Vector3 GenerateSpawnPosition()
     {
         float spawnPosX = Random.Range(-spawnRange, spawnRange);
