@@ -5,7 +5,7 @@ public class FollowPlayer : MonoBehaviour
     private GameObject goblin; // Reference to the goblin
     private GameManager gameManager;
     public Vector3 offset = new Vector3(0, 4, -6); // Camera offset from the goblin
-    public float rotationSpeed = 100.0f; // Speed of camera's rotation
+    public float rotationSpeed = 150.0f; // Speed of camera's rotation
     private float currentRoatation = 0f;  // Current horizontal rotation
 
     // Start is called before the first frame update

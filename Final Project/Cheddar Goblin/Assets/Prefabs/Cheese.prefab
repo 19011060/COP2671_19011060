@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6023448780270552935}
   - component: {fileID: 5943660240602515576}
   - component: {fileID: 3453383498015155967}
+  - component: {fileID: 2972447570636189193}
   m_Layer: 0
   m_Name: Cheese
   m_TagString: Untagged
@@ -28,13 +29,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4575885533723840335}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: -0, y: 0, z: 2.91}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!33 &1696571821277857180
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -118,3 +119,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2302ba4af5f3de46b184729fe586f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!111 &2972447570636189193
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4575885533723840335}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 5b1bef93c43d684489fd38ee7b3efcaa, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 5b1bef93c43d684489fd38ee7b3efcaa, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

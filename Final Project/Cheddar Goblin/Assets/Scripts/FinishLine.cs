@@ -5,11 +5,15 @@ using UnityEngine;
 public class FinishLine : MonoBehaviour
 {
     private GameManager gameManager;
+    private SoundManager soundManager;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        soundManager = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -19,11 +23,8 @@ public class FinishLine : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Registered");
-        //if (gameObject.CompareTag("Player"))
-        
         Debug.Log("Level Complete");
-        gameManager.isGameActive = false;
-        
+        gameManager.LevelComplete();
+        audioSource.PlayOneShot(soundManager.victory);
     }
 }

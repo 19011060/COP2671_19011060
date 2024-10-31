@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     private GameManager gameManager;
     private const string track = "Track";
     public float moveSpeed = 1.5f;   // Speed of the ball's movement
-    public float rotationSpeed = 100.0f; // Speed of goblin's rotation
+    public float rotationSpeed = 150.0f; // Speed of goblin's rotation
     private bool isOnGround = false;  // To check if the ball is on the track
 
     // Start is called before the first frame update
@@ -30,11 +30,11 @@ public class PlayerController : MonoBehaviour
                 // Move the ball forward and backward based based on which way the player's facing.
                 if (Input.GetKey(KeyCode.W))
                 {
-                    playerRb.AddForce(goblin.transform.forward * moveSpeed); // Move forward
+                    playerRb.AddForce(goblin.transform.forward * moveSpeed * Time.deltaTime); // Move forward
                 }
                 if (Input.GetKey(KeyCode.S))
                 {
-                    playerRb.AddForce(-goblin.transform.forward * moveSpeed); // Move backward
+                    playerRb.AddForce(-goblin.transform.forward * moveSpeed * Time.deltaTime); // Move backward
                 }
             }
 
