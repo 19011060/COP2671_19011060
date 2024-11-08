@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimerText : MonoBehaviour
+public class ScoreText : MonoBehaviour
 {
     private TMPro.TMP_Text m_Text;
 
@@ -13,6 +13,6 @@ public class TimerText : MonoBehaviour
 
     public void UpdateText(float value)
     {  
-        m_Text.text = $"Time: {value:F2}";
+        m_Text.text = $"Score: {value}";
     }
 }

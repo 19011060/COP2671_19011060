@@ -13,15 +13,16 @@ public class TimeManager : MonoBehaviour
     public UnityEvent OnTimerStart;
     public UnityEvent<float> OnTimerUpdate;
     public UnityEvent OnTimerStop;
-
+    private GameManager gameManager;
     public TimerType timeType = TimerType.CountDown;
-    public float startTime = 5;
+    public float startTime = 30;
     private float elapsedTime = 0;
     private Coroutine timerCoroutine = null;
 
     private void Start()
     {
         StartTimer();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
     public void StartTimer()
     {
@@ -40,10 +41,9 @@ public class TimeManager : MonoBehaviour
         {
             OnTimerStop.Invoke();
             StopCoroutine(timerCoroutine);
-            Debug.Log("Timer's Done.");
+            gameManager.GameOver();
+            Debug.Log("Time's up.");
         }
-       
-        
     }
 
     private IEnumerator StartTimerCo()

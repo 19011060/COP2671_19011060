@@ -9,9 +9,11 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-    private int score;
+
     public bool isGameActive;
     public GameObject pauseMenu;
+    private TimeManager timeManager;
+    private ScoreManager scoreManager;
     private bool isGamePaused;
     public UnityEvent OnGamePause;
     public UnityEvent OnGameResume;
@@ -20,6 +22,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        scoreManager = GameObject.Find("Score Manager").GetComponent<ScoreManager>();
+        timeManager = GameObject.Find("Time Manager").GetComponent<TimeManager>();
         isGameActive = true;
     }
 
@@ -41,18 +45,16 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        score = 0;
+        scoreManager.score = 0;
         ResumeGame();
     }
 
-    public void UpdateScore(int scoreToAdd)
-    {
-        score += scoreToAdd;
-    }
+    
 
     public void LevelComplete()
     {
         isGameActive = false;
+        timeManager.StopTimer();
     }
     
     public void GameOver()
