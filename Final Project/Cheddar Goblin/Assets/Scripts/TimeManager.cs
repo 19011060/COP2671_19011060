@@ -16,7 +16,8 @@ public class TimeManager : MonoBehaviour
     private GameManager gameManager;
     public TimerType timeType = TimerType.CountDown;
     public float startTime = 30;
-    private float elapsedTime = 0;
+    public float elapsedTime = 0;
+    public float endTime = 0;
     private Coroutine timerCoroutine = null;
 
     private void Start()

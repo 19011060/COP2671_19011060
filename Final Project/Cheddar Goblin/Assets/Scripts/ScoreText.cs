@@ -13,6 +13,6 @@ public class ScoreText : MonoBehaviour
 
     public void UpdateText(float value)
     {  
-        m_Text.text = $"Score: {value}";
+        m_Text.text = $"Score: {value:F0}";
     }
 }

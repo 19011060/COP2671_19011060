@@ -9,6 +9,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip goblin3;
     private AudioClip[] goblinSounds;
     public AudioClip victory;
+    public AudioClip death;
     private AudioSource goblinSource;
 
     // Start is called before the first frame update

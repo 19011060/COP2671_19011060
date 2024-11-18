@@ -42,5 +42,11 @@ public class FollowPlayer : MonoBehaviour
             transform.position = newPosition;
             transform.LookAt(goblin.transform.position + new Vector3(0, 1.5f, 0));
         }
+
+        else
+        {
+            // Only adjust the camera's rotation to look at the goblin's position without changing its position
+            transform.LookAt(goblin.transform.position + new Vector3(0, 1.5f, 0));
+        }
     }
 }

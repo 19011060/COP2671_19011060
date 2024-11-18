@@ -13,8 +13,10 @@ public class GameManager : MonoBehaviour
     public bool isGameActive;
     public GameObject pauseMenu;
     private TimeManager timeManager;
+    private SoundManager soundManager;
     private ScoreManager scoreManager;
     private bool isGamePaused;
+    private AudioSource audioSource;
     public UnityEvent OnGamePause;
     public UnityEvent OnGameResume;
 
@@ -24,6 +26,8 @@ public class GameManager : MonoBehaviour
     {
         scoreManager = GameObject.Find("Score Manager").GetComponent<ScoreManager>();
         timeManager = GameObject.Find("Time Manager").GetComponent<TimeManager>();
+        audioSource = GameObject.Find("Main Camera").GetComponent<AudioSource>();
+        soundManager = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
         isGameActive = true;
     }
 
@@ -49,17 +53,20 @@ public class GameManager : MonoBehaviour
         ResumeGame();
     }
 
-    
-
     public void LevelComplete()
     {
         isGameActive = false;
         timeManager.StopTimer();
+        float levelScore = scoreManager.score + (timeManager.elapsedTime * 10);
+
+        scoreManager.UpdateScore(levelScore);
     }
     
     public void GameOver()
     {
         isGameActive = false;
+        audioSource.PlayOneShot(soundManager.death);
+
     }
 
     public void RestartGame()

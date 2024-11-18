@@ -13,6 +13,6 @@ public class TimerText : MonoBehaviour
 
     public void UpdateText(float value)
     {  
-        m_Text.text = $"Time: {value:F2}";
+        m_Text.text = $"{value:F2}";
     }
 }
