@@ -19,6 +19,9 @@ public class OutOfBounds : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        gameManager.GameOver();
+        if (!gameManager.isLevelComplete)
+        {
+            gameManager.GameOver();
+        }     
     }
 }

@@ -22,8 +22,8 @@ public class TimeManager : MonoBehaviour
 
     private void Start()
     {
-        StartTimer();
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        
+        //gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
     public void StartTimer()
     {
@@ -42,7 +42,6 @@ public class TimeManager : MonoBehaviour
         {
             OnTimerStop.Invoke();
             StopCoroutine(timerCoroutine);
-            gameManager.GameOver();
             Debug.Log("Time's up.");
         }
     }

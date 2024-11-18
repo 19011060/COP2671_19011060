@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 {
 
     public bool isGameActive;
+    public bool isLevelComplete;
     public GameObject pauseMenu;
     private TimeManager timeManager;
     private SoundManager soundManager;
@@ -24,38 +25,45 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GameObject.Find("Goblin").GetComponent<AudioSource>();
         scoreManager = GameObject.Find("Score Manager").GetComponent<ScoreManager>();
         timeManager = GameObject.Find("Time Manager").GetComponent<TimeManager>();
-        audioSource = GameObject.Find("Main Camera").GetComponent<AudioSource>();
         soundManager = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
         isGameActive = true;
+        isLevelComplete = false;
+        timeManager.StartTimer();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            if(!isGamePaused)
+        if (isGameActive){
+            if (Input.GetKeyDown(KeyCode.Return))
             {
-                
-            }
-            else
-            {
-                
+                if (!isGamePaused)
+                {
+                    OnGamePause.Invoke();
+                    isGamePaused = true;
+                }
+                else
+                {
+                    OnGameResume.Invoke();
+                    isGamePaused = false;
+                }
             }
         }
+        
     }
 
     public void StartGame()
     {
         scoreManager.score = 0;
-        ResumeGame();
     }
 
     public void LevelComplete()
     {
         isGameActive = false;
+        isLevelComplete = true;
         timeManager.StopTimer();
         float levelScore = scoreManager.score + (timeManager.elapsedTime * 10);
 
@@ -65,6 +73,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         isGameActive = false;
+        timeManager.StopTimer();
         audioSource.PlayOneShot(soundManager.death);
 
     }
@@ -72,17 +81,5 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
 
-    }
-
-    private void PauseGame()
-    {
-        isGamePaused = true;
-        //pauseMenu.SetActive(true);
-    }
-
-    private void ResumeGame()
-    {
-        isGamePaused = false;
-        //pauseMenu.SetActive(false);
     }
 }
