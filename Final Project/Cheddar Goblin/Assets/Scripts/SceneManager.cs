@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 public class SceneManager : MonoBehaviour
 {
     public string sceneToUnload;
-    public string sceneName; 
+    public string sceneToLoad; 
     public void LoadScene()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad);
 
         UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(sceneToUnload);
     }

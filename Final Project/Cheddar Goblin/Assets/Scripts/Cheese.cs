@@ -7,7 +7,7 @@ public class Cheese : MonoBehaviour
 {
     private ScoreManager scoreManager;
     private SoundManager soundManager;
-    private int pointValue = 100;
+    private int pointValue = 1;
     public float spinSpeed = 50f;
     public float floatHeight = .5f;
     public float floatSpeed = 1f;
