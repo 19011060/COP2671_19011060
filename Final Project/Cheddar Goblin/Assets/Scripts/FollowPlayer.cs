@@ -6,26 +6,35 @@ public class FollowPlayer : MonoBehaviour
     private GameManager gameManager;
     public Vector3 offset = new Vector3(0, 4, -6); // Camera offset from the goblin
     public float rotationSpeed = 150.0f; // Speed of camera's rotation
-    private float currentRoatation = 0f;  // Current horizontal rotation
+    private Transform goblinTransform;
 
     // Start is called before the first frame update
     void Start()
     {
         goblin = GameObject.Find("Goblin"); // Find the goblin GameObject
+        goblinTransform = goblin.transform; // Cache the goblin's transform
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Rotate the camera around the goblin using 'A' and 'D' input
-        if (Input.GetKey(KeyCode.A))
+        if (gameManager.isGameActive)
         {
-            currentRoatation -= rotationSpeed * Time.deltaTime; // Rotate left
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            currentRoatation += rotationSpeed * Time.deltaTime; // Rotate right
+            float rotationInput = 0f;
+
+            // Get input for rotation
+            if (Input.GetKey(KeyCode.A))
+            {
+                rotationInput = -rotationSpeed * Time.deltaTime; // Rotate left
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                rotationInput = rotationSpeed * Time.deltaTime; // Rotate right
+            }
+
+            // Apply the rotation to the goblin
+            goblinTransform.Rotate(0, rotationInput, 0);
         }
     }
 
@@ -34,19 +43,17 @@ public class FollowPlayer : MonoBehaviour
     {
         if (gameManager.isGameActive)
         {
-            // Calculate the camera's rotation and position for orbiting around the player
-            Quaternion rotation = Quaternion.Euler(0, currentRoatation, 0); // Quaternion rotation around the y-axis using currentRoatation as the degrees
-            Vector3 newPosition = goblin.transform.position + rotation * offset; // Add the new rotation to the new position of the camera
+            // Calculate the camera's new position based on the goblin's rotation
+            Vector3 newPosition = goblinTransform.position + goblinTransform.rotation * offset;
 
-            // Set the camera's new position and focus it on the goblin
+            // Set the camera's position and make it look at the goblin
             transform.position = newPosition;
-            transform.LookAt(goblin.transform.position + new Vector3(0, 1.5f, 0));
+            transform.LookAt(goblinTransform.position + new Vector3(0, 1.5f, 0));
         }
-
-        if (!gameManager.isGameActive && !gameManager.isLevelComplete)
+        else if (!gameManager.isGameActive && !gameManager.isLevelComplete)
         {
             // Only adjust the camera's rotation to look at the goblin's position without changing its position
-            transform.LookAt(goblin.transform.position + new Vector3(0, 1.5f, 0));
+            transform.LookAt(goblinTransform.position + new Vector3(0, 1.5f, 0));
         }
     }
 }

@@ -8,11 +8,11 @@ using Unity.VisualScripting;
 using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
-{
-
+{ 
     public bool isGameActive;
     public bool isLevelComplete;
-    public GameObject pauseMenu;
+    public GameObject winMenu;
+    public GameObject loseMenu;
     private TimeManager timeManager;
     private SoundManager soundManager;
     private ScoreManager scoreManager;
@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
         audioSource = GameObject.Find("Goblin").GetComponent<AudioSource>();
         scoreManager = GameObject.Find("Score Manager").GetComponent<ScoreManager>();
         timeManager = GameObject.Find("Time Manager").GetComponent<TimeManager>();
+        soundManager = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
         soundManager = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
         isGameActive = true;
         isLevelComplete = false;
@@ -66,7 +67,7 @@ public class GameManager : MonoBehaviour
         isLevelComplete = true;
         timeManager.StopTimer();
         float levelScore = scoreManager.score + (timeManager.elapsedTime * 10);
-
+        winMenu.SetActive(true);
         scoreManager.UpdateScore(levelScore);
     }
     
@@ -75,11 +76,6 @@ public class GameManager : MonoBehaviour
         isGameActive = false;
         timeManager.StopTimer();
         audioSource.PlayOneShot(soundManager.death);
-
-    }
-
-    public void RestartGame()
-    {
-
+        loseMenu.SetActive(true);
     }
 }
