@@ -23,5 +23,14 @@ public class SceneManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Title Screen [Start Here]");
     }
-   
+
+    public void CloseGame()
+    {
+        Application.Quit();
+        if (UnityEditor.EditorApplication.isPlaying)
+        {
+            UnityEditor.EditorApplication.isPlaying = false;
+        }
+    }
+
 }
