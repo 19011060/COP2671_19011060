@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,15 +14,14 @@ public class TimeManager : MonoBehaviour
     public UnityEvent OnTimerStop;
     private GameManager gameManager;
     public TimerType timeType = TimerType.CountDown;
-    public float startTime = 30;
+    public float startTime;
     public float elapsedTime = 0;
     public float endTime = 0;
     private Coroutine timerCoroutine = null;
 
     private void Start()
     {
-        
-        //gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
     public void StartTimer()
     {
@@ -61,7 +59,14 @@ public class TimeManager : MonoBehaviour
 
             if(elapsedTime <= 0)
             {
-                StopTimer();
+                if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Title Screen [Start Here]")
+                {
+                    StopTimer();
+                }
+                else
+                {
+                    gameManager.GameOver();
+                }
             }
             yield return null;
         }

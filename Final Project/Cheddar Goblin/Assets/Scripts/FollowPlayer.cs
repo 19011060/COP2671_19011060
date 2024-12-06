@@ -1,7 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
+    private GameObject cheeseFX;
     private GameObject goblin; // Reference to the goblin
     private GameManager gameManager;
     public Vector3 offset = new Vector3(0, 4, -6); // Camera offset from the goblin
@@ -11,6 +14,7 @@ public class FollowPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cheeseFX = GameObject.Find("Cheese Collect");
         goblin = GameObject.Find("Goblin"); // Find the goblin GameObject
         goblinTransform = goblin.transform; // Cache the goblin's transform
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
@@ -19,6 +23,8 @@ public class FollowPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        cheeseFX.transform.position = goblin.transform.position;
+
         if (gameManager.isGameActive)
         {
             float rotationInput = 0f;

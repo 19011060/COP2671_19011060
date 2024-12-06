@@ -23,8 +23,11 @@ public class FinishLine : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Level Complete");
-        gameManager.LevelComplete();
-        audioSource.PlayOneShot(soundManager.victory);
+        if (gameManager.isGameActive)
+        {
+            Debug.Log("Level Complete");
+            gameManager.LevelComplete();
+            audioSource.PlayOneShot(soundManager.victory);
+        }
     }
 }

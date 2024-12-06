@@ -19,7 +19,7 @@ public class TitleGoblin : MonoBehaviour
     {
         // Save the initial global rotation of the object
         initialRotation = transform.rotation;
-        timeManager = GameObject.Find("TimeManager").GetComponent<TimeManager>();
+        timeManager = GameObject.Find("Time Manager").GetComponent<TimeManager>();
         goblinRB = GameObject.Find("TitlePlayer").GetComponent<Rigidbody>();
         goblinSource = GameObject.Find("TitlePlayer").GetComponent<AudioSource>();
         goblinRB.useGravity = false;

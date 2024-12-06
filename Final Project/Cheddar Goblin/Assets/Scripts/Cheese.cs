@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Cheese : MonoBehaviour
 {
     private ScoreManager scoreManager;
     private SoundManager soundManager;
+    private ParticleSystem cheeseFX;
     private int pointValue = 1;
     public float spinSpeed = 50f;
     public float floatHeight = .5f;
@@ -19,19 +21,17 @@ public class Cheese : MonoBehaviour
     void Start()
     {
         scoreManager = GameObject.Find("Score Manager").GetComponent<ScoreManager>();
+        cheeseFX = GameObject.Find("Cheese Collect").GetComponent<ParticleSystem>();
         soundManager = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
         startPos = transform.position;
         transform.rotation = Quaternion.Euler(90, 0, 0);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // Floating effect (sinusoidal movement)
         float newY = startPos.y + Mathf.Sin(Time.time * floatSpeed) * floatHeight;
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
 
-        // Spinning effect (rotation)
         transform.Rotate(Vector3.forward, spinSpeed * Time.deltaTime);
     }
 
@@ -39,7 +39,7 @@ public class Cheese : MonoBehaviour
     {
         scoreManager.UpdateScore(pointValue);
         soundManager.PlayRandomGoblinSound();
-        Destroy(gameObject);     
+        gameObject.SetActive(false);
+        cheeseFX.Play();
     }
-    
 }

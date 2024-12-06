@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -5,6 +7,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;
     private GameObject goblin;
     private GameManager gameManager;
+    private Vector3 spawnPos;
+    private Quaternion spawnGRot;
+    private Quaternion spawnRot;
     private const string track = "Track";
     public float moveSpeed = 1.5f;   // Speed of the ball's movement
     public float rotationSpeed = 150.0f; // Speed of goblin's rotation
@@ -15,6 +20,9 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody>();
         goblin = GameObject.Find("Goblin");
+        spawnPos = transform.position;
+        spawnGRot = goblin.transform.rotation;
+        spawnRot = transform.rotation;
         goblin.transform.position = transform.position;// Center goblin inside the ball
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
@@ -68,5 +76,14 @@ public class PlayerController : MonoBehaviour
         {
             isOnGround = false;
         }
+    }
+
+    public void Respawn()
+    {
+        transform.position = spawnPos;
+        playerRb.velocity = Vector3.zero;
+        playerRb.angularVelocity = Vector3.zero;
+        goblin.transform.rotation = spawnGRot;
+        transform.rotation = spawnRot;
     }
 }

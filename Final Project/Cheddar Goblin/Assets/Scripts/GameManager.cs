@@ -61,6 +61,9 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        isGameActive = true;
+        isLevelComplete = false;
+        ui.SetActive(true);
         scoreManager.score = 0;
     }
 
